@@ -29,7 +29,7 @@ const Header = () => {
           variants={motionStages}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          Pizza Joint
+          Pizza Spot
         </motion.h2>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='responsive-navbar-nav' />

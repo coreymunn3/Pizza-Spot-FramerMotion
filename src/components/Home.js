@@ -13,7 +13,7 @@ const Home = () => {
       transition={{ delay: 0.5, duration: 1 }}
       className='home'
     >
-      <h2 style={{ marginBottom: '2rem' }}>The Pizza Joint - Welcome!</h2>
+      <h2 style={{ marginBottom: '2rem' }}>The Pizza Spot - Welcome!</h2>
 
       <Link to='/base'>
         <Button as={motion.div} animate={{ scale: 1.5 }} variant='primary'>
