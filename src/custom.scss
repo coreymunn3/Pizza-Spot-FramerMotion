@@ -1,0 +1,107 @@
+// change the theme
+$primary: #09cfda;
+$theme-colors: (
+  'primary': $primary,
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: rgb(197, 165, 20);
+  background: radial-gradient(
+    circle,
+    rgb(197, 165, 20) 0%,
+    rgb(143, 119, 13) 100%
+  );
+}
+
+.container {
+  max-width: 500px;
+  margin: 100px auto 40px;
+  h2,
+  h6 {
+    text-align: center;
+  }
+}
+.text-primary {
+  color: $primary;
+}
+
+.progress-container {
+  padding: 1rem;
+}
+.backbtn {
+  padding: 0 1rem;
+}
+
+/* header */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand-primary {
+  color: $primary !important;
+}
+.pizza-svg {
+  width: 50px;
+  overflow: visible;
+  stroke: $primary;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* lists */
+.list-group {
+  border-radius: 5px;
+}
+.list-group-item {
+  background-color: transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.topping-container {
+  width: 40%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.topping-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  h6 {
+    margin: 0;
+  }
+}
+
+/* pages */
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.order.container {
+  text-align: center;
+  max-width: 800px;
+}
+.order-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order p {
+  margin: 20px auto;
+}
