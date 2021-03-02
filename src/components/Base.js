@@ -5,6 +5,33 @@ import { Check2, ArrowRightCircleFill } from 'react-bootstrap-icons';
 import { motion } from 'framer-motion';
 import BackBtn from './BackBtn';
 
+const containerVariants = {
+  hidden: {
+    x: '100vw',
+    opacity: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      mass: '0.4',
+      damping: '10',
+    },
+  },
+};
+const buttonVariants = {
+  hidden: {
+    x: '-100vw',
+  },
+  visible: {
+    x: 0,
+    transition: {
+      type: 'spring',
+      duration: 0.5,
+    },
+  },
+};
 const Base = ({ setBase, pizza, addProgress }) => {
   const bases = ['Classic', 'Thin Crust', 'Extra Crispy', 'Brooklyn Style'];
   return (
@@ -12,15 +39,16 @@ const Base = ({ setBase, pizza, addProgress }) => {
       <BackBtn path='/home' />
       <Container
         as={motion.div}
-        initial={{ x: '100vw' }}
-        animate={{ x: 0 }}
-        transition={{ type: 'spring', delay: 0.25 }}
+        variants={containerVariants}
+        initial='hidden'
+        animate='visible'
       >
         <h2 style={{ marginBottom: '2rem' }}>Step 1: Choose Your Base</h2>
         <ListGroup variant='flush' as='ul' className='mb-4'>
           {bases.map((base) => (
             <ListGroup.Item
-              as='li'
+              as={motion.li}
+              whileHover={{ scale: 1.1, originX: 0, color: '#fff' }}
               key={base}
               active={base === pizza.base ? true : false}
               onClick={() => setBase(base)}
@@ -32,12 +60,14 @@ const Base = ({ setBase, pizza, addProgress }) => {
 
         {pizza.base && (
           <motion.div
-            initial={{ x: '-100vw' }}
-            animate={{ x: 0 }}
-            transition={{ type: 'spring', duration: 0.5 }}
+            initial='hidden'
+            animate='visible'
+            variants={buttonVariants}
           >
             <Link to='/toppings'>
               <Button
+                as={motion.div}
+                whileHover={{ scale: 1.1 }}
                 variant='primary'
                 size='lg'
                 block
