@@ -4,6 +4,7 @@ import { Button, Container, Dropdown } from 'react-bootstrap';
 import { Cart2, BagCheckFill } from 'react-bootstrap-icons';
 import { motion } from 'framer-motion';
 import BackBtn from './BackBtn';
+import Progress from './Progress';
 
 const containerVariants = {
   hidden: {
@@ -21,6 +22,12 @@ const containerVariants = {
       staggerChildren: '0.3',
     },
   },
+  exit: {
+    x: '-100vw',
+    transition: {
+      ease: 'easeInOut',
+    },
+  },
 };
 
 const listVariants = {
@@ -35,19 +42,22 @@ const listVariants = {
   },
 };
 
-const Order = ({ pizza, addProgress, removeProgress }) => {
+const Order = ({ pizza, addProgress, progress, removeProgress }) => {
   return (
     <Fragment>
+      <Progress progress={progress} />
       <BackBtn path='/toppings' removeProgress={removeProgress} />
       <Container
         as={motion.div}
         variants={containerVariants}
         initial='hidden'
         animate='visible'
+        exit='exit'
       >
         <div className='order-title mb-4'>
           <Cart2 size={36} />
-          <h2 style={{ margin: 0 }}>Order Summary</h2>
+
+          <h2 style={{ margin: 0 }}>Thank You For Your Order!</h2>
         </div>
 
         <h6>

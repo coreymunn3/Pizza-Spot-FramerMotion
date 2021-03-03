@@ -3,6 +3,7 @@ import { Button, Container, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Check2, ArrowRightCircleFill } from 'react-bootstrap-icons';
 import { motion } from 'framer-motion';
+import Progress from './Progress';
 import BackBtn from './BackBtn';
 
 const containerVariants = {
@@ -19,6 +20,12 @@ const containerVariants = {
       damping: '10',
     },
   },
+  exit: {
+    x: '-100vw',
+    transition: {
+      ease: 'easeInOut',
+    },
+  },
 };
 const buttonVariants = {
   hidden: {
@@ -31,17 +38,27 @@ const buttonVariants = {
       duration: 0.5,
     },
   },
+  hover: {
+    scale: 1.1,
+    transition: {
+      repeat: Infinity,
+      repeatType: 'mirror',
+      duration: 0.3,
+    },
+  },
 };
-const Base = ({ setBase, pizza, addProgress }) => {
+const Base = ({ setBase, pizza, progress, addProgress }) => {
   const bases = ['Classic', 'Thin Crust', 'Extra Crispy', 'Brooklyn Style'];
   return (
     <Fragment>
+      <Progress progress={progress} />
       <BackBtn path='/home' />
       <Container
         as={motion.div}
         variants={containerVariants}
         initial='hidden'
         animate='visible'
+        exit='exit'
       >
         <h2 style={{ marginBottom: '2rem' }}>Step 1: Choose Your Base</h2>
         <ListGroup variant='flush' as='ul' className='mb-4'>
@@ -62,12 +79,11 @@ const Base = ({ setBase, pizza, addProgress }) => {
           <motion.div
             initial='hidden'
             animate='visible'
+            whileHover='hover'
             variants={buttonVariants}
           >
             <Link to='/toppings'>
               <Button
-                as={motion.div}
-                whileHover={{ scale: 1.1 }}
                 variant='primary'
                 size='lg'
                 block

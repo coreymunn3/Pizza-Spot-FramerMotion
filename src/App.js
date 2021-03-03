@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { Fragment, useState } from 'react';
+import { Switch, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import Home from './components/Home';
 import Header from './components/Header';
 import Base from './components/Base';
 import Order from './components/Order';
 import Toppings from './components/Toppings';
-import Progress from './components/Progress';
 
 const App = () => {
+  const location = useLocation();
   const [pizza, setPizza] = useState({
     base: '',
     toppings: [],
@@ -38,33 +39,41 @@ const App = () => {
     setPizza({ ...pizza, toppings: newToppings });
   };
   return (
-    <Router>
+    <Fragment>
       <Header />
-      <Progress progress={progress} />
-      <Switch>
-        <Route path='/base'>
-          <Base setBase={setBase} pizza={pizza} addProgress={addProgress} />
-        </Route>
-        <Route path='/toppings'>
-          <Toppings
-            addTopping={addTopping}
-            pizza={pizza}
-            addProgress={addProgress}
-            removeProgress={removeProgress}
-          />
-        </Route>
-        <Route path='/order'>
-          <Order
-            pizza={pizza}
-            addProgress={addProgress}
-            removeProgress={removeProgress}
-          />
-        </Route>
-        <Route path='/'>
-          <Home pizza={pizza} />
-        </Route>
-      </Switch>
-    </Router>
+      <AnimatePresence exitBeforeEnter>
+        <Switch location={location} key={location.key}>
+          <Route path='/base'>
+            <Base
+              setBase={setBase}
+              pizza={pizza}
+              progress={progress}
+              addProgress={addProgress}
+            />
+          </Route>
+          <Route path='/toppings'>
+            <Toppings
+              addTopping={addTopping}
+              pizza={pizza}
+              progress={progress}
+              addProgress={addProgress}
+              removeProgress={removeProgress}
+            />
+          </Route>
+          <Route path='/order'>
+            <Order
+              pizza={pizza}
+              progress={progress}
+              addProgress={addProgress}
+              removeProgress={removeProgress}
+            />
+          </Route>
+          <Route path='/'>
+            <Home pizza={pizza} />
+          </Route>
+        </Switch>
+      </AnimatePresence>
+    </Fragment>
   );
 };
 

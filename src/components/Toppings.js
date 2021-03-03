@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Container, ListGroup } from 'react-bootstrap';
 import { Check2 } from 'react-bootstrap-icons';
 import BackBtn from './BackBtn';
+import Progress from './Progress';
 import { motion } from 'framer-motion';
 
 const containerVariants = {
@@ -19,7 +20,14 @@ const containerVariants = {
       damping: '10',
     },
   },
+  exit: {
+    x: '-100vw',
+    transition: {
+      ease: 'easeInOut',
+    },
+  },
 };
+
 const buttonVariants = {
   hidden: {
     x: '-100vw',
@@ -31,9 +39,23 @@ const buttonVariants = {
       duration: 0.5,
     },
   },
+  hover: {
+    scale: 1.1,
+    transition: {
+      repeat: Infinity,
+      repeatType: 'mirror',
+      duration: 0.3,
+    },
+  },
 };
 
-const Toppings = ({ addTopping, pizza, addProgress, removeProgress }) => {
+const Toppings = ({
+  addTopping,
+  pizza,
+  progress,
+  addProgress,
+  removeProgress,
+}) => {
   const toppings = [
     'Cheese - Plain',
     'mushrooms',
@@ -46,12 +68,14 @@ const Toppings = ({ addTopping, pizza, addProgress, removeProgress }) => {
   ];
   return (
     <Fragment>
+      <Progress progress={progress} />
       <BackBtn path='/base' removeProgress={removeProgress} />
       <Container
         as={motion.div}
         variants={containerVariants}
         initial='hidden'
         animate='visible'
+        exit='exit'
       >
         <h2 style={{ marginBottom: '2rem' }}>Step 2: Choose your Toppings</h2>
         <ListGroup variant='flush' as='ul' className='mb-4'>
@@ -72,16 +96,11 @@ const Toppings = ({ addTopping, pizza, addProgress, removeProgress }) => {
           <motion.div
             initial='hidden'
             animate='visible'
+            whileHover='hover'
             variants={buttonVariants}
           >
             <Link to='/order'>
-              <Button
-                as={motion.div}
-                whileHover={{ scale: 1.1 }}
-                size='lg'
-                block
-                onClick={() => addProgress()}
-              >
+              <Button size='lg' block onClick={() => addProgress()}>
                 Review Order
               </Button>
             </Link>

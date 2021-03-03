@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRightCircleFill } from 'react-bootstrap-icons';
 import { motion } from 'framer-motion';
 
+// variants for framer motion
 const containerVariants = {
   hidden: {
     opacity: 0,
@@ -16,10 +17,21 @@ const containerVariants = {
       duration: 1,
     },
   },
+  exit: {
+    x: '-100vw',
+    transition: {
+      ease: 'easeInOut',
+    },
+  },
 };
 const buttonVariants = {
   hover: {
-    scale: [1.5, 1.6, 1.5, 1.6, 1.5, 1.6, 1.5],
+    scale: 1.6,
+    transition: {
+      repeat: Infinity,
+      repeatType: 'mirror',
+      duration: 0.3,
+    },
   },
   visible: {
     scale: 1.5,
@@ -32,6 +44,7 @@ const Home = () => {
       variants={containerVariants}
       initial='hidden'
       animate='visible'
+      exit='exit'
       className='home'
     >
       <h2 style={{ marginBottom: '2rem' }}>The Pizza Spot - Welcome!</h2>
