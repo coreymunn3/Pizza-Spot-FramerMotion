@@ -3,6 +3,7 @@ import { Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ArrowRightCircleFill } from 'react-bootstrap-icons';
 import { motion } from 'framer-motion';
+import Loader from './Loader';
 
 // variants for framer motion
 const containerVariants = {
@@ -61,6 +62,7 @@ const Home = () => {
           <ArrowRightCircleFill />
         </Button>
       </Link>
+      <Loader />
     </Container>
   );
 };

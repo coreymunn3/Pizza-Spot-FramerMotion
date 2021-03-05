@@ -56,7 +56,6 @@ const Order = ({ pizza, addProgress, progress, removeProgress }) => {
       >
         <div className='order-title mb-4'>
           <Cart2 size={36} />
-
           <h2 style={{ margin: 0 }}>Thank You For Your Order!</h2>
         </div>
 
@@ -77,7 +76,7 @@ const Order = ({ pizza, addProgress, progress, removeProgress }) => {
             </motion.div>
           ))}
         </div>
-        <Link to='/home'>
+        <Link to='/confirmation'>
           <Button size='lg' block onClick={() => addProgress()}>
             Place Your Order
           </Button>

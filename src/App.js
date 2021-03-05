@@ -6,6 +6,8 @@ import Header from './components/Header';
 import Base from './components/Base';
 import Order from './components/Order';
 import Toppings from './components/Toppings';
+import Confirmation from './components/Confirmation';
+import Modal from './components/Modal';
 
 const App = () => {
   const location = useLocation();
@@ -14,6 +16,7 @@ const App = () => {
     toppings: [],
   });
   const [progress, setProgress] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   const addProgress = () => {
     setProgress(progress + 33.33);
@@ -38,10 +41,25 @@ const App = () => {
     }
     setPizza({ ...pizza, toppings: newToppings });
   };
+  const startOver = () => {
+    setPizza({
+      base: '',
+      toppings: [],
+    });
+    setProgress(0);
+  };
   return (
     <Fragment>
       <Header />
-      <AnimatePresence exitBeforeEnter>
+      <Modal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        startOver={startOver}
+      />
+      <AnimatePresence
+        exitBeforeEnter
+        onExitComplete={() => setShowModal(false)}
+      >
         <Switch location={location} key={location.key}>
           <Route path='/base'>
             <Base
@@ -66,6 +84,13 @@ const App = () => {
               progress={progress}
               addProgress={addProgress}
               removeProgress={removeProgress}
+            />
+          </Route>
+          <Route path='/confirmation'>
+            <Confirmation
+              progress={progress}
+              pizza={pizza}
+              setShowModal={setShowModal}
             />
           </Route>
           <Route path='/'>
